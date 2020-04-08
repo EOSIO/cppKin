@@ -31,6 +31,9 @@ namespace cppkin
         int GetSampleCount() const { return m_sampleCount; }
         EncodingType GetEncodingType() const { return m_encodingType; }
         int GetBatchSize() const { return m_batchSize; }
+        const std::string& GetApiKey() const { return m_apiKey; }
+        const std::string& GetDataFormat() const { return m_dataFormat; }
+        int GetDataFormatVersion() const { return m_dataFormatVersion; }
 
     private:
         ConfigParams();
@@ -38,6 +41,9 @@ namespace cppkin
     private:
         std::string m_hostAddress;
         std::string m_serviceName;
+        std::string m_apiKey;
+        std::string m_dataFormat;
+        int m_dataFormatVersion;
         int m_port;
         TransportType m_transportType;
         bool m_debug;

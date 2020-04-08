@@ -14,6 +14,9 @@ namespace  cppkin {
         static const char *SAMPLE_COUNT;
         static const char *ENCODING_TYPE;
         static const char *BATCH_SIZE;
+        static const char *API_KEY;
+        static const char *DATA_FORMAT;
+        static const char *DATA_FORMAT_VERSION;
     private:
         ConfigTags();
     };

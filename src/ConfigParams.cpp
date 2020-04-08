@@ -13,7 +13,7 @@ namespace cppkin
     }
 
     ConfigParams::ConfigParams():
-            m_transportType(TransportType::Stub), m_debug(false), m_sampleCount(1000), m_encodingType(EncodingType::Json), m_batchSize(50)
+            m_transportType(TransportType::Stub), m_debug(false), m_sampleCount(1000), m_encodingType(EncodingType::Json), m_batchSize(50), m_apiKey(""), m_dataFormat(""), m_dataFormatVersion(0)
     {}
 
     void ConfigParams::Load(const GeneralParams& configParams)
@@ -32,5 +32,11 @@ namespace cppkin
             m_batchSize = configParams.Get<int>(ConfigTags::BATCH_SIZE);
         if(configParams.Exists(ConfigTags::SAMPLE_COUNT))
             m_sampleCount = configParams.Get<int>(ConfigTags::SAMPLE_COUNT);
+        if(configParams.Exists(ConfigTags::API_KEY))
+            m_apiKey = configParams.Get<string>(ConfigTags::API_KEY);
+        if(configParams.Exists(ConfigTags::DATA_FORMAT))
+            m_dataFormat = configParams.Get<string>(ConfigTags::DATA_FORMAT);
+        if(configParams.Exists(ConfigTags::DATA_FORMAT_VERSION))
+            m_dataFormatVersion = configParams.Get<int>(ConfigTags::DATA_FORMAT_VERSION);
     }
 }
