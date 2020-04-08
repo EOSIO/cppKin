@@ -23,6 +23,7 @@ namespace cppkin
         void Join(const char* b3format);
         void AddAnnotation(const char* value);
         void AddAnnotation(const char* value, int_fast64_t timeStamp);
+        void AddLocalEndpoint();
         void AddTag(const char* key, bool value);
         void AddTag(const char* key, const char* value);
         void Submit(const char* value = Annotation::Value::SERVER_SEND);

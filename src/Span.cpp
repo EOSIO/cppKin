@@ -22,6 +22,7 @@ namespace cppkin
     {
         const span_impl::SpanHeader& header = m_span->GetHeader();
         Span span( operationName, header.TraceID, header.ID, header.Sampled);
+        span.AddLocalEndpoint();
         span.AddAnnotation(value, m_span->GetTimeStamp());
         return span;
     }
@@ -48,6 +49,13 @@ namespace cppkin
         if(m_span->GetHeader().Sampled == false)
             return;
         m_span->CreateSimpleAnnotation(value, timeStamp);
+    }
+
+    void Span::AddLocalEndpoint()
+    {
+        if(m_span->GetHeader().Sampled == false)
+            return;
+        m_span->AddLocalEndpoint();
     }
     
     void Span::AddTag(const char* key, bool value)

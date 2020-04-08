@@ -52,6 +52,19 @@ namespace cppkin {
         }
 
         {
+            auto endPoint = span.GetLocalEndpoint();
+            writer.Key("localEndpoint");
+            writer.StartObject();
+            writer.Key("serviceName");
+            writer.String(endPoint.ServiceName.c_str());
+            writer.Key("ipv4");
+            writer.String(endPoint.Host.c_str());
+            writer.Key("port");
+            writer.Int(endPoint.Port);
+            writer.EndObject();
+        }
+
+        {
             writer.Key("tags");
             writer.StartObject();
             writer.EndObject();
