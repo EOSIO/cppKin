@@ -51,7 +51,10 @@ int main( int argc, const char *argv[] )
           ("encoding", value<string>()->default_value("json"), "Encoding" )
           ("host", value<string>()->default_value("127.0.0.1"), "Host" )
           ("port", value<int>()->default_value(-1), "Port")
-          ("service", value<string>()->default_value("example_service"), "Service");
+          ("service", value<string>()->default_value("example_service"), "Service")
+          ("api-key", value<string>()->default_value(""), "API Key")
+          ("data-format", value<string>()->default_value("zipkin"), "Data Format")
+          ("data-format-version", value<int>()->default_value(2), "Data Format Version");
     variables_map vm;
     store(parse_command_line(argc, argv, desc), vm);
     notify(vm);
@@ -85,6 +88,9 @@ int main( int argc, const char *argv[] )
     cppkinParams.AddParam(cppkin::ConfigTags::SAMPLE_COUNT, 1);
     cppkinParams.AddParam(cppkin::ConfigTags::TRANSPORT_TYPE, cppkin::TransportType(transportType).ToString());
     cppkinParams.AddParam(cppkin::ConfigTags::ENCODING_TYPE, cppkin::EncodingType(encodingType).ToString());
+    cppkinParams.AddParam(cppkin::ConfigTags::API_KEY, vm["api-key"].as<string>());
+    cppkinParams.AddParam(cppkin::ConfigTags::DATA_FORMAT, vm["data-format"].as<string>());
+    cppkinParams.AddParam(cppkin::ConfigTags::DATA_FORMAT_VERSION, vm["data-format-version"].as<int>());
 
     cppkin::Init(cppkinParams);
 
