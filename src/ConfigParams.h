@@ -40,16 +40,17 @@ namespace cppkin
 
     private:
         std::string m_hostAddress;
-        std::string m_serviceName;
-        std::string m_apiKey;
-        std::string m_dataFormat;
-        int m_dataFormatVersion;
         int m_port;
+        std::string m_serviceName;
+
         TransportType m_transportType;
         bool m_debug;
         int m_sampleCount;
         EncodingType m_encodingType;
         int m_batchSize;
+        std::string m_apiKey;
+        std::string m_dataFormat;
+        int m_dataFormatVersion;
     };
 }
 #if defined(WIN32)
