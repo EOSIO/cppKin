@@ -40,37 +40,21 @@ namespace cppkin {
         writer.String(span.GetHeader().Name.c_str());
         writer.Key("id");
         writer.String(to_hex(span.GetHeader().ID).c_str());
-        writer.Key("debug");
-        writer.Bool(ConfigParams::Instance().GetDebug());
-        writer.Key("timestamp");
-        writer.Int64(span.GetTimeStamp());
         writer.Key("duration");
         writer.Int64(span.GetDuration());
+        writer.Key("kind");
+        writer.String("CLIENT");
 
         if(span.GetHeader().ParentIdSet)
         {
             writer.Key("parentId");
             writer.String(to_hex(span.GetHeader().ParentID).c_str());
         }
-    
+
         {
-            writer.Key("annotations");
-            writer.StartArray();
-            for (auto &annotation : span.GetAnnotations())
-                if (annotation->GetType() == AnnotationType::Simple)
-                    Serialize(writer, static_cast<const SimpleAnnotation &>(*annotation));
-        
-            writer.EndArray();
-        }
-    
-        {
-            writer.Key("binaryAnnotations");
-            writer.StartArray();
-            for (auto &annotation : span.GetAnnotations())
-                if (annotation->GetType() == AnnotationType::Binary)
-                    Serialize(writer, static_cast<const BinaryAnnotation &>(*annotation));
-        
-            writer.EndArray();
+            writer.Key("tags");
+            writer.StartObject();
+            writer.EndObject();
         }
     
         writer.EndObject();

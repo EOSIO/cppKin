@@ -18,9 +18,9 @@ namespace cppkin
 
     void ConfigParams::Load(const GeneralParams& configParams)
     {
-        m_hostAddress = configParams.Get<string>(ConfigTags::HOST_ADDRESS);
-        m_port = configParams.Get<int>(ConfigTags::PORT);
+        m_endpoint = configParams.Get<string>(ConfigTags::ENDPOINT);
         m_serviceName = configParams.Get<string>(ConfigTags::SERVICE_NAME);
+        m_port = configParams.Get<int>(ConfigTags::PORT);
 
         if(configParams.Exists(ConfigTags::DEBUG))
             m_debug = configParams.Get<bool>(ConfigTags::DEBUG);

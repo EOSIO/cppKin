@@ -47,7 +47,7 @@ namespace cppkin
             curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
             std::stringstream url;
-            url << "http://" << ConfigParams::Instance().GetHostAddress() << ":" << ConfigParams::Instance().GetPort() << "/api/v1/spans";
+            url << ConfigParams::Instance().GetEndpoint();
 
             curl_easy_setopt(curl, CURLOPT_URL, url.str().c_str() );
             curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, buffer.length());

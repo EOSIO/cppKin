@@ -23,7 +23,7 @@ namespace cppkin
         ~ConfigParams() {}
         void Load(const core::GeneralParams& configParams);
         //Accessors
-        const std::string& GetHostAddress() const { return m_hostAddress; }
+        const std::string& GetEndpoint() const { return m_endpoint; }
         int GetPort() const { return m_port; }
         TransportType GetTransportType() const { return m_transportType; }
         const std::string& GetServiceName() const { return m_serviceName;}
@@ -39,9 +39,9 @@ namespace cppkin
         ConfigParams();
 
     private:
-        std::string m_hostAddress;
-        int m_port;
+        std::string m_endpoint;
         std::string m_serviceName;
+        int m_port;
 
         TransportType m_transportType;
         bool m_debug;
