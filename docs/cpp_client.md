@@ -11,7 +11,7 @@ Before we can start we need to initialize our client, should be done once per se
 lets set our client different policies:
 ```c++
 cppkin::CppkinParams cppkinParams;
-cppkinParams.AddParam(cppkin::ConfigTags::HOST_ADDRESS,"127.0.0.1");
+cppkinParams.AddParam(cppkin::ConfigTags::ENDPOINT,"127.0.0.1");
 cppkinParams.AddParam(cppkin::ConfigTags::PORT, 9410);
 cppkinParams.AddParam(cppkin::ConfigTags::SERVICE_NAME,"serivce_name");
 cppkinParams.AddParam(cppkin::ConfigTags::SAMPLE_COUNT, 10000);
@@ -20,7 +20,7 @@ cppkinParams.AddParam(cppkin::ConfigTags::SAMPLE_COUNT, 10000);
 
 | Config Tag      | Info |
 | -------------   | ------------- |
-| HOST_ADDRESS    | Zipkin server address in IPV4 format XXX.XXX.XXX.XXX.  |
+| ENDPOINT        | Zipkin server address including port and endpoint  |
 | PORT            | Zipkin server port value, usually 9411 for the Http collector  |
 | TRANSPORT_TYPE  | Which transportaion to use Scribe/Http, Http is default. |
 | SERVICE_NAME    | our service name to be displayed at Zipkin UI.  |
