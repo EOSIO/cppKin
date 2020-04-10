@@ -1,6 +1,6 @@
 steps:
   - command: "./scripts/build-and-push-container.sh cppkin $BUILDKITE_BRANCH"
-    label: "Docker build eosio-cppkin"
+    label: "Docker build cppkin"
     agents:
       queue: "automation-eks-docker-builder-fleet"
     timeout: 15
