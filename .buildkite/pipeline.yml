@@ -10,6 +10,7 @@ steps:
   - wait
 
   - block: "Package version"
+    branches: "master"
     prompt: "Input package version"
     fields:
       - text: "Version"
@@ -24,6 +25,7 @@ steps:
       sleep 5
       docker cp $CID:/cppkin_${VERSION}-ubuntu-18.04_amd64.deb .
       ls
+    branches: "master"
     label: "Create cppkin debian package"
     agents:
       queue: "automation-eks-docker-builder-fleet"
