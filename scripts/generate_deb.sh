@@ -3,10 +3,12 @@
 # This assumes that you installed cppkin via:
 # cppkin.sh config --output_dir=/usr/local --3rd_loc_prefix=/usr/local
 
+set -u
+
 cd /
 
-PACKAGE="eosio-cppkin"
-VERSION="1.0.0"
+PACKAGE="cppkin"
+VERSION=$1
 
 mkdir -p /${PACKAGE}/DEBIAN
 mkdir -p /${PACKAGE}/usr/local/lib
