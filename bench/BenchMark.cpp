@@ -30,7 +30,7 @@ int main(int argc, char** argv)
 {
     cppkin::CppkinParams cppkinParams;
     cppkinParams.AddParam(cppkin::ConfigTags::TRANSPORT_TYPE, (cppkin::TransportType(cppkin::TransportType::Stub)).ToString());
-    cppkinParams.AddParam(cppkin::ConfigTags::HOST_ADDRESS, string("127.0.0.1"));
+    cppkinParams.AddParam(cppkin::ConfigTags::ENDPOINT, string("127.0.0.1"));
     cppkinParams.AddParam(cppkin::ConfigTags::PORT, 9410);
     cppkinParams.AddParam(cppkin::ConfigTags::SERVICE_NAME, string("Cluster_Manager"));
     cppkinParams.AddParam(cppkin::ConfigTags::DEBUG, false);

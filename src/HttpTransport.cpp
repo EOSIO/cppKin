@@ -25,11 +25,29 @@ namespace cppkin
             else
                 headers = curl_slist_append(headers, "Content-Type: application/json");
 
+            if (ConfigParams::Instance().GetApiKey() != "") {
+                std::stringstream apikey;
+                apikey << "Api-Key: " << ConfigParams::Instance().GetApiKey();
+                headers = curl_slist_append(headers, apikey.str().c_str());
+            }
+
+            if (ConfigParams::Instance().GetDataFormat() != "") {
+                std::stringstream dataformat;
+                dataformat << "Data-Format: " << ConfigParams::Instance().GetDataFormat();
+                headers = curl_slist_append(headers, dataformat.str().c_str());
+            }
+
+            if (ConfigParams::Instance().GetDataFormatVersion() != 0) {
+                std::stringstream dataformatversion;
+                dataformatversion << "Data-Format-Version: " << ConfigParams::Instance().GetDataFormatVersion();
+                headers = curl_slist_append(headers, dataformatversion.str().c_str());
+            }
+
             headers = curl_slist_append(headers, "Expect:");
             curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
             std::stringstream url;
-            url << "http://" << ConfigParams::Instance().GetHostAddress() << ":" << ConfigParams::Instance().GetPort() << "/api/v1/spans";
+            url << ConfigParams::Instance().GetEndpoint();
 
             curl_easy_setopt(curl, CURLOPT_URL, url.str().c_str() );
             curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, buffer.length());

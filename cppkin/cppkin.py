@@ -22,7 +22,7 @@ def top_span():
 
 def start(host_address, port, service_name, sample_count):
     params = _cppkin.CppkinParams()
-    params.add_str(_cppkin.HOST_ADDRESS, host_address)
+    params.add_str(_cppkin.ENDPOINT, host_address)
     params.add_int(_cppkin.PORT, port)
     params.add_str(_cppkin.SERVICE_NAME, service_name)
     params.add_bool(_cppkin.DEBUG, False)

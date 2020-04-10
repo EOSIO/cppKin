@@ -35,7 +35,7 @@ INIT_MODULE(_cppkin, "cppkin library wrapper")
     params.AddMethod("add_str", "will add a str typed param", &cppkin::CppkinParams::AddParam<const std::string&>);
     params.AddMethod("add_bool", "will add a bool typed param", &cppkin::CppkinParams::AddParam<bool>);
 
-    sweetPy::CPythonGlobalVariable(module, "HOST_ADDRESS", cppkin::ConfigTags::HOST_ADDRESS);
+    sweetPy::CPythonGlobalVariable(module, "ENDPOINT", cppkin::ConfigTags::ENDPOINT);
     sweetPy::CPythonGlobalVariable(module, "PORT", cppkin::ConfigTags::PORT);
     sweetPy::CPythonGlobalVariable(module, "SERVICE_NAME", cppkin::ConfigTags::SERVICE_NAME);
     sweetPy::CPythonGlobalVariable(module, "DEBUG", cppkin::ConfigTags::DEBUG);
@@ -91,7 +91,7 @@ INIT_MODULE(_cppkin, "cppkin library wrapper")
             .def("add_str", &cppkin::CppkinParams::AddParam<const std::string&>)
             .def("add_bool", &cppkin::CppkinParams::AddParam<const bool&>);
         
-        module.attr("HOST_ADDRESS") = cppkin::ConfigTags::HOST_ADDRESS;
+        module.attr("ENDPOINT") = cppkin::ConfigTags::ENDPOINT;
         module.attr("PORT") = cppkin::ConfigTags::PORT;
         module.attr("SERVICE_NAME") = cppkin::ConfigTags::SERVICE_NAME;
         module.attr("DEBUG") = cppkin::ConfigTags::DEBUG;

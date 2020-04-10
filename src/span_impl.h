@@ -38,6 +38,12 @@ namespace cppkin
             bool Sampled;
             bool ParentIdSet;
         };
+        struct CPPKIN_EXPORT LocalEndpoint
+        {
+            std::string ServiceName;
+            std::string Host;
+            int_fast16_t Port;
+        };
 
     public:
         ~span_impl() = default;
@@ -45,13 +51,15 @@ namespace cppkin
         span_impl& operator=(const span_impl&) = delete;
         const SpanHeader& GetHeader() const;
         const Annotations& GetAnnotations() const;
+        const LocalEndpoint& GetLocalEndpoint() const;
         void CreateSimpleAnnotation(const std::string& event);
         void CreateSimpleAnnotation(const std::string& event, int_fast64_t timeStamp);
         void CreateBinaryAnnotation(const char* key, bool value);
         void CreateBinaryAnnotation(const char* key, const char* value);
-		int_fast64_t GetTimeStamp() const;
-		int_fast64_t GetDuration() const;
-		void SetEndTime();
+        void AddLocalEndpoint();
+        int_fast64_t GetTimeStamp() const;
+        int_fast64_t GetDuration() const;
+        void SetEndTime();
 
     private:
         friend class Trace;
@@ -67,6 +75,7 @@ namespace cppkin
     private:
         SpanHeader m_header;
         Annotations m_events;
+        LocalEndpoint m_localEndpoint;
         int_fast64_t m_timeStamp;
         int_fast64_t m_duration;
     };
