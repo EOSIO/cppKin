@@ -54,6 +54,11 @@ Homepage: https://github.com/EOSIO/cppkin
 Maintainer: support@block.one
 Description: C++ integration for zipkin tracing" &> /${PACKAGE}/DEBIAN/control
 
+echo "#!/bin/bash
+echo 'Running ldconfig'
+ldconfig" &> /${PACKAGE}/DEBIAN/postinst
+chmod +x /${PACKAGE}/DEBIAN/postinst
+
 dpkg-deb --build ${PACKAGE}
 
 mv /${PACKAGE}.deb /${PACKAGE}_${VERSION}-ubuntu-18.04_amd64.deb
