@@ -7,13 +7,13 @@ namespace cppkin
     
     BinaryAnnotation::BinaryAnnotation(const EndPoint& endPoint, const char* key, bool value)
             :Annotation(AnnotationType::Binary, endPoint), m_key(key),
-             m_valueType(BinaryValueTypes::Boolean), m_value(value)
+             m_valueType(ValueTypes::Boolean), m_value(value)
     {
     }
     
     BinaryAnnotation::BinaryAnnotation(const EndPoint& endPoint, const char* key, const char* value)
             :Annotation(AnnotationType::Binary, endPoint), m_key(key),
-             m_valueType(BinaryValueTypes::String), m_value(std::string(value))
+             m_valueType(ValueTypes::String), m_value(std::string(value))
     {
     }
     
@@ -25,13 +25,13 @@ namespace cppkin
     
     void BinaryAnnotation::GetValue(bool& value) const
     {
-        if(m_valueType != BinaryValueTypes::Boolean)
+        if(m_valueType != ValueTypes::Boolean)
             throw core::Exception(__CORE_SOURCE, "Requested type dosen't match the stored instance type");
         value = boost::get<bool>(m_value);
     }
     void BinaryAnnotation::GetValue(std::string& value) const
     {
-        if(m_valueType != BinaryValueTypes::String)
+        if(m_valueType != ValueTypes::String)
             throw core::Exception(__CORE_SOURCE, "Requested type dosen't match the stored instance type");
         value = boost::get<std::string>(m_value);
     }

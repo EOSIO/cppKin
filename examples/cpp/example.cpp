@@ -86,6 +86,10 @@ int main( int argc, const char *argv[] )
     portable_sleep(1);
     span_1.AddAnnotation("Span1Event");
     span_1.AddTag("str value", "some value");
+    span_1.AddSimpleTag("StringTag", "string");
+    span_1.AddSimpleTag("BoolTag", true);
+    span_1.AddSimpleTag("IntTag", 10);
+    span_1.AddSimpleTag("FloatTag", float(10.99));
     //Lets use the span container in order to reach a certain stack frame.
     cppkin::PushSpan(span_1);
     foo();

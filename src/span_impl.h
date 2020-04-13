@@ -8,6 +8,7 @@
 #include "core/Environment.h"
 #include "Annotation.h"
 #include "BinaryAnnotation.h"
+#include "SimpleTag.h"
 #include "ConfigParams.h"
 #include "Export.h"
 #if defined(WIN32)
@@ -24,6 +25,7 @@ namespace cppkin
     {
     public:
         typedef std::vector<std::unique_ptr<Annotation>> Annotations;
+        typedef std::vector<std::unique_ptr<SimpleTag>> Tags;
         struct CPPKIN_EXPORT SpanHeader
         {
         public:
@@ -51,11 +53,16 @@ namespace cppkin
         span_impl& operator=(const span_impl&) = delete;
         const SpanHeader& GetHeader() const;
         const Annotations& GetAnnotations() const;
+        const Tags& GetTags() const;
         const LocalEndpoint& GetLocalEndpoint() const;
         void CreateSimpleAnnotation(const std::string& event);
         void CreateSimpleAnnotation(const std::string& event, int_fast64_t timeStamp);
         void CreateBinaryAnnotation(const char* key, bool value);
         void CreateBinaryAnnotation(const char* key, const char* value);
+        void CreateSimpleTag(const char* key, bool value);
+        void CreateSimpleTag(const char* key, const char* value);
+        void CreateSimpleTag(const char* key, int value);
+        void CreateSimpleTag(const char* key, float value);
         void AddLocalEndpoint();
         int_fast64_t GetTimeStamp() const;
         int_fast64_t GetDuration() const;
@@ -75,6 +82,7 @@ namespace cppkin
     private:
         SpanHeader m_header;
         Annotations m_events;
+        Tags m_tags;
         LocalEndpoint m_localEndpoint;
         int_fast64_t m_timeStamp;
         int_fast64_t m_duration;
