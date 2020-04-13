@@ -56,6 +56,12 @@ namespace cppkin
             }
             
         }
+
+        for(const auto& tag : obj.m_tags)
+        {
+            m_tags.emplace_back(new SimpleTag(*tag));
+        }
+
         m_timeStamp = obj.m_timeStamp;
         m_duration = obj.m_duration;
         m_header = obj.m_header;
@@ -68,6 +74,10 @@ namespace cppkin
 
     const span_impl::Annotations& span_impl::GetAnnotations() const{
         return m_events;
+    }
+
+    const span_impl::Tags& span_impl::GetTags() const{
+        return m_tags;
     }
 
     const span_impl::LocalEndpoint& span_impl::GetLocalEndpoint() const{
@@ -111,6 +121,26 @@ namespace cppkin
                                              core::Environment::Instance().GetIPV4Addresses().back(),
                                              ConfigParams::Instance().GetPort());
         m_events.emplace_back(new BinaryAnnotation(endPoint, key, value));
+    }
+
+    void span_impl::CreateSimpleTag(const char *key, bool value)
+    {
+        m_tags.emplace_back(new SimpleTag(key, value));
+    }
+
+    void span_impl::CreateSimpleTag(const char *key, const char* value)
+    {
+        m_tags.emplace_back(new SimpleTag(key, value));
+    }
+
+    void span_impl::CreateSimpleTag(const char *key, int value)
+    {
+        m_tags.emplace_back(new SimpleTag(key, value));
+    }
+
+    void span_impl::CreateSimpleTag(const char *key, float value)
+    {
+        m_tags.emplace_back(new SimpleTag(key, value));
     }
 
     int_fast64_t span_impl::GetTimeStamp() const{

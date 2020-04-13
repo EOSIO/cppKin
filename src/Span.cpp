@@ -72,6 +72,34 @@ namespace cppkin
         m_span->CreateBinaryAnnotation(key, value);
     }
 
+    void Span::AddSimpleTag(const char* key, bool value)
+    {
+        if(m_span->GetHeader().Sampled == false)
+            return;
+        m_span->CreateSimpleTag(key, value);
+    }
+
+    void Span::AddSimpleTag(const char* key, const char* value)
+    {
+        if(m_span->GetHeader().Sampled == false)
+            return;
+        m_span->CreateSimpleTag(key, value);
+    }
+
+    void Span::AddSimpleTag(const char* key, int value)
+    {
+        if(m_span->GetHeader().Sampled == false)
+            return;
+        m_span->CreateSimpleTag(key, value);
+    }
+
+    void Span::AddSimpleTag(const char* key, float value)
+    {
+        if(m_span->GetHeader().Sampled == false)
+            return;
+        m_span->CreateSimpleTag(key, value);
+    }
+
     void Span::Submit(const char* value)
     {
         if(m_span->GetHeader().Sampled == false)

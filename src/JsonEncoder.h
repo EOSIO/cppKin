@@ -6,6 +6,7 @@
 #include "ConfigParams.h"
 #include "SimpleAnnotation.h"
 #include "BinaryAnnotation.h"
+#include "ValueTypes.h"
 
 namespace cppkin {
     
@@ -67,9 +68,43 @@ namespace cppkin {
         {
             writer.Key("tags");
             writer.StartObject();
+            for(auto& tag : span.GetTags())
+            {
+                writer.Key(tag->GetKey().c_str());
+                switch(tag->GetValueType())
+                {
+                    case ValueTypes::Boolean:
+                        {
+                            bool bool_value;
+                            tag->GetValue(bool_value);
+                            writer.Bool(bool_value);
+                        }
+                        break;
+                    case ValueTypes::String:
+                        {
+                            std::string str_value;
+                            tag->GetValue(str_value);
+                            writer.String(str_value.c_str());
+                        }
+                        break;
+                    case ValueTypes::Int:
+                        {
+                            int int_value;
+                            tag->GetValue(int_value);
+                            writer.Int(int_value);
+                        }
+                        break;
+                    case ValueTypes::Float:
+                        {
+                            float float_value;
+                            tag->GetValue(float_value);
+                            writer.Double(float_value);
+                        }
+                        break;
+                }
+            }
             writer.EndObject();
         }
-    
         writer.EndObject();
     }
 
@@ -105,15 +140,22 @@ namespace cppkin {
         writer.Key("value");
         switch(annotation.GetValueType())
         {
-            case BinaryValueTypes::Boolean:
-                bool bool_value;
-                annotation.GetValue(bool_value);
-                writer.Bool(bool_value);
+            case ValueTypes::Boolean:
+                {
+                    bool bool_value;
+                    annotation.GetValue(bool_value);
+                    writer.Bool(bool_value);
+                }
                 break;
-            case BinaryValueTypes::String:
-                std::string str_value;
-                annotation.GetValue(str_value);
-                writer.String(str_value.c_str());
+            case ValueTypes::String:
+                {
+                    std::string str_value;
+                    annotation.GetValue(str_value);
+                    writer.String(str_value.c_str());
+                }
+                break;
+            case ValueTypes::Int:
+            case ValueTypes::Float:
                 break;
         }
     

@@ -26,6 +26,10 @@ namespace cppkin
         void AddLocalEndpoint();
         void AddTag(const char* key, bool value);
         void AddTag(const char* key, const char* value);
+        void AddSimpleTag(const char* key, bool value);
+        void AddSimpleTag(const char* key, const char* value);
+        void AddSimpleTag(const char* key, int value);
+        void AddSimpleTag(const char* key, float value);
         void Submit(const char* value = Annotation::Value::SERVER_SEND);
         bool IsSampled() const;
         void GetHeaderB3Format(const char*& b3header) const;
