@@ -9,6 +9,7 @@ cd /
 
 PACKAGE="cppkin"
 VERSION=$1
+UBUNTU_VERSION=$2
 
 mkdir -p /${PACKAGE}/DEBIAN
 mkdir -p /${PACKAGE}/usr/local/lib
@@ -61,4 +62,4 @@ chmod +x /${PACKAGE}/DEBIAN/postinst
 
 dpkg-deb --build ${PACKAGE}
 
-mv /${PACKAGE}.deb /${PACKAGE}_${VERSION}-ubuntu-18.04_amd64.deb
+mv /${PACKAGE}.deb /${PACKAGE}_${VERSION}-ubuntu-${UBUNTU_VERSION}_amd64.deb

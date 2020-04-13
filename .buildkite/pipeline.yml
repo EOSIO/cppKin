@@ -29,7 +29,7 @@ steps:
 
   - command: |
       VERSION=$(buildkite-agent meta-data get package-version)
-      CID=$(docker run -d registry.devel.b1ops.net/b1automation/cppkin_ubuntu1804:$BUILDKITE_BRANCH ./scripts/generate_deb.sh $VERSION)
+      CID=$(docker run -d registry.devel.b1ops.net/b1automation/cppkin_ubuntu1804:$BUILDKITE_BRANCH ./scripts/generate_deb.sh $VERSION "18.04")
       sleep 5
       docker cp $CID:/cppkin_${VERSION}-ubuntu-18.04_amd64.deb .
       ls
@@ -43,7 +43,7 @@ steps:
 
   - command: |
       VERSION=$(buildkite-agent meta-data get package-version)
-      CID=$(docker run -d registry.devel.b1ops.net/b1automation/cppkin_ubuntu1904:$BUILDKITE_BRANCH ./scripts/generate_deb.sh $VERSION)
+      CID=$(docker run -d registry.devel.b1ops.net/b1automation/cppkin_ubuntu1904:$BUILDKITE_BRANCH ./scripts/generate_deb.sh $VERSION "19.04")
       sleep 5
       docker cp $CID:/cppkin_${VERSION}-ubuntu-19.04_amd64.deb .
       ls
