@@ -33,6 +33,7 @@ cp /usr/local/include/JsonEncoder.h /${PACKAGE}/usr/local/include
 cp /usr/local/include/Sampler.h /${PACKAGE}/usr/local/include
 cp /usr/local/include/ScribeTransport.h /${PACKAGE}/usr/local/include
 cp /usr/local/include/SimpleAnnotation.h /${PACKAGE}/usr/local/include
+cp /usr/local/include/SimpleTag.h /${PACKAGE}/usr/local/include
 cp /usr/local/include/Span.h /${PACKAGE}/usr/local/include
 cp /usr/local/include/StubTransport.h /${PACKAGE}/usr/local/include
 cp /usr/local/include/ThriftEncoder.h /${PACKAGE}/usr/local/include
