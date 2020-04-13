@@ -21,6 +21,7 @@ cp /usr/local/lib/libcppkin.so /${PACKAGE}/usr/local/lib
 cp /usr/local/include/Annotation.h /${PACKAGE}/usr/local/include
 cp /usr/local/include/AnnotationType.h /${PACKAGE}/usr/local/include
 cp /usr/local/include/BinaryAnnotation.h /${PACKAGE}/usr/local/include
+cp /usr/local/include/ValueTypes.h /${PACKAGE}/usr/local/include
 cp /usr/local/include/ConfigParams.h /${PACKAGE}/usr/local/include
 cp /usr/local/include/ConfigTags.h /${PACKAGE}/usr/local/include
 cp /usr/local/include/Encoder.h /${PACKAGE}/usr/local/include
