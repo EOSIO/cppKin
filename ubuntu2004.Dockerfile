@@ -11,7 +11,7 @@ RUN wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsof
 
 RUN apt update
 RUN apt install -y apt-transport-https
-RUN apt-get update && apt-get install -y dotnet-sdk-3.1
+RUN apt-get update && apt-get install -y dotnet-sdk-2.1.105
 
 RUN mkdir /cppKin
 COPY CMakeLists.txt /cppKin
