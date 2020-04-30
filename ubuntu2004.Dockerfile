@@ -1,5 +1,7 @@
 FROM ubuntu:20.04
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && apt-get install -y wget git cmake pybind11-dev rapidjson-dev && \
     apt-get install -y libcurl4-openssl-dev libblkid-dev e2fslibs-dev  && \
     apt-get install -y libboost-all-dev libaudit-dev software-properties-common
