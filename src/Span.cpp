@@ -103,12 +103,12 @@ namespace cppkin
 
     void Span::Submit(const char* value)
     {
+        std::cerr << "Trace ID: " << m_span->GetHeader().TraceID << std::endl;
         if(m_span->GetHeader().Sampled == false)
             return;
         m_span->SetEndTime();
         if(strcmp(value, Annotation::Value::NOP) != 0)
             AddAnnotation(value, m_span->GetTimeStamp() + m_span->GetDuration());
-        std::cerr << "Trace ID: " << m_span->GetHeader().TraceID << std::endl;
         TransportManager::Instance().PushSpan(m_span);
     }
 

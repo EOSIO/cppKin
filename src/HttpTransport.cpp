@@ -11,8 +11,8 @@ using namespace std;
 namespace cppkin
 {
     void HttpTransport::Submit(std::vector<std::unique_ptr<span_impl>>& spans) {
-
         string buffer = EncoderContext(spans).ToString();
+        std::cerr << buffer << std::endl;
         try {
 
             CURL* curl = curl_easy_init();
