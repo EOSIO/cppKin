@@ -18,7 +18,6 @@ steps:
   - wait
 
   - block: "Package version"
-    branches: "master"
     prompt: "Input package version"
     fields:
       - text: "Version"
