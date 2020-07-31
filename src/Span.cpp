@@ -1,6 +1,7 @@
 #include "Span.h"
 #include <functional>
 #include "TransportManager.h"
+#include <iostream>
 
 namespace cppkin
 {
