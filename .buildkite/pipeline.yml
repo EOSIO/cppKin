@@ -33,7 +33,6 @@ steps:
       sleep 5
       docker cp $CID:/cppkin_${VERSION}-ubuntu-18.04_amd64.deb .
       ls
-    branches: "master"
     label: ":ubuntu: 18.04 Create cppkin debian package"
     agents:
       queue: "automation-eks-docker-builder-fleet"
