@@ -41,6 +41,8 @@ namespace cppkin {
         writer.String(span.GetHeader().Name.c_str());
         writer.Key("id");
         writer.String(to_hex(span.GetHeader().ID).c_str());
+        writer.Key("timestamp");
+        writer.Int64(span.GetTimeStamp());
         writer.Key("duration");
         writer.Int64(span.GetDuration());
         writer.Key("kind");
