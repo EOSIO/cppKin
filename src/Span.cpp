@@ -2,6 +2,8 @@
 #include <functional>
 #include "TransportManager.h"
 
+#include<iostream>
+
 namespace cppkin
 {
 
@@ -76,6 +78,7 @@ namespace cppkin
     {
         if(m_span->GetHeader().Sampled == false)
             return;
+        std::cerr << "Adding tag" << std::endl;
         m_span->CreateSimpleTag(key, value);
     }
 
@@ -83,6 +86,7 @@ namespace cppkin
     {
         if(m_span->GetHeader().Sampled == false)
             return;
+        std::cerr << "Adding tag" << std::endl;
         m_span->CreateSimpleTag(key, value);
     }
 
@@ -90,6 +94,7 @@ namespace cppkin
     {
         if(m_span->GetHeader().Sampled == false)
             return;
+        std::cerr << "Adding tag" << std::endl;
         m_span->CreateSimpleTag(key, value);
     }
 
@@ -97,6 +102,7 @@ namespace cppkin
     {
         if(m_span->GetHeader().Sampled == false)
             return;
+        std::cerr << "Adding tag" << std::endl;
         m_span->CreateSimpleTag(key, value);
     }
 
