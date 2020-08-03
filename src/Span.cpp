@@ -1,6 +1,7 @@
 #include "Span.h"
 #include <functional>
 #include "TransportManager.h"
+#include <iostream>
 
 namespace cppkin
 {
@@ -102,8 +103,10 @@ namespace cppkin
 
     void Span::Submit(const char* value)
     {
+        std::cerr << "Trace ID: " << m_span->GetHeader().TraceID << std::endl;
         if(m_span->GetHeader().Sampled == false)
-            return;
+            std::cerr << "Sampled == false" << std::endl;
+            //return;
         m_span->SetEndTime();
         if(strcmp(value, Annotation::Value::NOP) != 0)
             AddAnnotation(value, m_span->GetTimeStamp() + m_span->GetDuration());

@@ -1,6 +1,7 @@
 #include "ConfigParams.h"
 #include "core/GeneralParams.h"
 #include "ConfigTags.h"
+#include <iostream>
 
 using namespace std;
 using namespace core;
@@ -18,6 +19,7 @@ namespace cppkin
 
     void ConfigParams::Load(const GeneralParams& configParams)
     {
+        std::cerr << "Loading cppkin configuration" << std::endl;
         m_endpoint = configParams.Get<string>(ConfigTags::ENDPOINT);
         m_serviceName = configParams.Get<string>(ConfigTags::SERVICE_NAME);
         m_port = configParams.Get<int>(ConfigTags::PORT);

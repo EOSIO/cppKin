@@ -4,14 +4,15 @@
 #include "ConfigParams.h"
 #include "Encoder.h"
 #include "EncodingContext.h"
+#include <iostream>
 
 using namespace std;
 
 namespace cppkin
 {
     void HttpTransport::Submit(std::vector<std::unique_ptr<span_impl>>& spans) {
-
         string buffer = EncoderContext(spans).ToString();
+        std::cerr << buffer << std::endl;
         try {
 
             CURL* curl = curl_easy_init();
@@ -45,6 +46,8 @@ namespace cppkin
 
             headers = curl_slist_append(headers, "Expect:");
             curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+
+            std::cerr << buffer.c_str() << std::endl;
 
             std::stringstream url;
             url << ConfigParams::Instance().GetEndpoint();
