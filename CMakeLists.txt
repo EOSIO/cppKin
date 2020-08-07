@@ -122,7 +122,11 @@ if(COMPILATION_STEP)
         set(TO_LINK_LIBS pthread curl libCore${CMAKE_DEBUG_POSTFIX}.so)
     endif()
 
-    add_library(cppkin SHARED src/Trace.h src/SpanContainer.h src/SpanContainer.cpp src/span_impl.cpp src/span_impl.h src/AnnotationType.cpp src/AnnotationType.h src/Annotation.h src/SimpleAnnotation.cpp src/SimpleAnnotation.h src/cppkin.h src/Trace.cpp src/Encoder.cpp src/Encoder.h src/EncodingTypes.cpp src/EncodingTypes.h src/EncodingContext.cpp src/EncodingContext.h src/TransportManager.cpp src/TransportManager.h src/Transport.cpp src/Transport.h src/HttpTransport.cpp src/HttpTransport.h src/ConfigTags.h src/TransportType.cpp src/TransportType.h src/TransportFactory.h src/TransportFactory.cpp src/ConfigParams.cpp src/ConfigTags.cpp src/Annotation.cpp src/Sampler.cpp src/JsonEncoder.h src/cppkin.cpp src/Export.h src/Span.cpp src/Span.h src/BinaryAnnotation.cpp src/SimpleTag.cpp)
+    set(CPPKIN_SOURCES src/Trace.h src/SpanContainer.h src/SpanContainer.cpp src/span_impl.cpp src/span_impl.h src/AnnotationType.cpp src/AnnotationType.h src/Annotation.h src/SimpleAnnotation.cpp src/SimpleAnnotation.h src/cppkin.h src/Trace.cpp src/Encoder.cpp src/Encoder.h src/EncodingTypes.cpp src/EncodingTypes.h src/EncodingContext.cpp src/EncodingContext.h src/TransportManager.cpp src/TransportManager.h src/Transport.cpp src/Transport.h src/HttpTransport.cpp src/HttpTransport.h src/ConfigTags.h src/TransportType.cpp src/TransportType.h src/TransportFactory.h src/TransportFactory.cpp src/ConfigParams.cpp src/ConfigTags.cpp src/Annotation.cpp src/Sampler.cpp src/JsonEncoder.h src/cppkin.cpp src/Export.h src/Span.cpp src/Span.h src/BinaryAnnotation.cpp src/SimpleTag.cpp)
+
+    add_library(cppkin SHARED ${CPPKIN_SOURCES})
+    add_library(cppkin STATIC ${CPPKIN_SOURCES})
+
 	if(CPPKIN_DEPEND_LIST)
 		add_dependencies(cppkin ${CPPKIN_DEPEND_LIST})
 	endif()
@@ -180,10 +184,11 @@ if(COMPILATION_STEP)
 		install(TARGETS cppkin
 				PUBLIC_HEADER DESTINATION ${OUTPUT_DIR}/include
 				LIBRARY DESTINATION ${OUTPUT_DIR}/lib
+				ARCHIVE DESTINATION ${OUTPUT_DIR}/lib
 				)
         install(DIRECTORY ${PROJECT_3RD_LOC}/lib
                 DESTINATION ${OUTPUT_DIR}
-                FILES_MATCHING PATTERN "*.so"
+                FILES_MATCHING PATTERN "*.so" PATTERN "*.a"
                 )
 	endif()
 endif()

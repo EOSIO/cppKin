@@ -17,6 +17,7 @@ mkdir -p /${PACKAGE}/usr/local/include
 
 cp /usr/local/lib/libCore.so /${PACKAGE}/usr/local/lib
 cp /usr/local/lib/libcppkin.so /${PACKAGE}/usr/local/lib
+cp /usr/local/lib/libcppkin.a /${PACKAGE}/usr/local/lib
 
 cp /usr/local/include/Annotation.h /${PACKAGE}/usr/local/include
 cp /usr/local/include/AnnotationType.h /${PACKAGE}/usr/local/include
