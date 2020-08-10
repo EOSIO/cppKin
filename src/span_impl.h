@@ -34,11 +34,11 @@ namespace cppkin
             SpanHeader() = default;
         public:
             std::string Name;
-            uint_fast64_t ID;
-            uint_fast64_t ParentID;
-            uint_fast64_t TraceID;
-            bool Sampled;
-            bool ParentIdSet;
+            uint_fast64_t ID = 0;
+            uint_fast64_t ParentID = 0;
+            uint_fast64_t TraceID = 0;
+            bool Sampled = false;
+            bool ParentIdSet = false;
         };
         struct CPPKIN_EXPORT LocalEndpoint
         {
@@ -84,8 +84,8 @@ namespace cppkin
         Annotations m_events;
         Tags m_tags;
         LocalEndpoint m_localEndpoint;
-        int_fast64_t m_timeStamp;
-        int_fast64_t m_duration;
+        int_fast64_t m_timeStamp = 0;
+        int_fast64_t m_duration = 0;
     };
 }
 #if defined(WIN32)
