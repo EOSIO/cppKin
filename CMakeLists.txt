@@ -124,14 +124,18 @@ if(COMPILATION_STEP)
 
     set(CPPKIN_SOURCES src/Trace.h src/SpanContainer.h src/SpanContainer.cpp src/span_impl.cpp src/span_impl.h src/AnnotationType.cpp src/AnnotationType.h src/Annotation.h src/SimpleAnnotation.cpp src/SimpleAnnotation.h src/cppkin.h src/Trace.cpp src/Encoder.cpp src/Encoder.h src/EncodingTypes.cpp src/EncodingTypes.h src/EncodingContext.cpp src/EncodingContext.h src/TransportManager.cpp src/TransportManager.h src/Transport.cpp src/Transport.h src/HttpTransport.cpp src/HttpTransport.h src/ConfigTags.h src/TransportType.cpp src/TransportType.h src/TransportFactory.h src/TransportFactory.cpp src/ConfigParams.cpp src/ConfigTags.cpp src/Annotation.cpp src/Sampler.cpp src/JsonEncoder.h src/cppkin.cpp src/Export.h src/Span.cpp src/Span.h src/BinaryAnnotation.cpp src/SimpleTag.cpp)
 
-    add_library(cppkin SHARED ${CPPKIN_SOURCES})
-    add_library(cppkin STATIC ${CPPKIN_SOURCES})
+    add_library(cppkin-shared SHARED ${CPPKIN_SOURCES})
+    set_target_properties(cppkin-shared PROPERTIES OUTPUT_NAME cppkin)
+    add_library(cppkin-static STATIC ${CPPKIN_SOURCES})
+    set_target_properties(cppkin-static PROPERTIES OUTPUT_NAME cppkin)
 
 	if(CPPKIN_DEPEND_LIST)
-		add_dependencies(cppkin ${CPPKIN_DEPEND_LIST})
+		add_dependencies(cppkin-shared ${CPPKIN_DEPEND_LIST})
+        add_dependencies(cppkin-static ${CPPKIN_DEPEND_LIST})
 	endif()
-        set_target_properties(cppkin PROPERTIES PUBLIC_HEADER "src/Trace.h;src/Annotation.h;src/cppkin.h;src/Span.h;src/AnnotationType.h;src/BinaryAnnotation.h;src/ValueTypes.h;src/SimpleTag.h;src/ConfigParams.h;src/ConfigTags.h;src/Encoder.h;src/EncodingContext.h;src/EncodingTypes.h;src/Export.h;src/HttpTransport.h;src/JsonEncoder.h;src/Sampler.h;src/ScribeTransport.h;src/SimpleAnnotation.h;src/span_impl.h;src/StubTransport.h;src/ThriftEncoder.h;src/Transport.h;src/TransportFactory.h;src/TransportManager.h;src/TransportType.h")
-	
+    set_target_properties(cppkin-shared PROPERTIES PUBLIC_HEADER "src/Trace.h;src/Annotation.h;src/cppkin.h;src/Span.h;src/AnnotationType.h;src/BinaryAnnotation.h;src/ValueTypes.h;src/SimpleTag.h;src/ConfigParams.h;src/ConfigTags.h;src/Encoder.h;src/EncodingContext.h;src/EncodingTypes.h;src/Export.h;src/HttpTransport.h;src/JsonEncoder.h;src/Sampler.h;src/ScribeTransport.h;src/SimpleAnnotation.h;src/span_impl.h;src/StubTransport.h;src/ThriftEncoder.h;src/Transport.h;src/TransportFactory.h;src/TransportManager.h;src/TransportType.h")
+    set_target_properties(cppkin-static PROPERTIES PUBLIC_HEADER "src/Trace.h;src/Annotation.h;src/cppkin.h;src/Span.h;src/AnnotationType.h;src/BinaryAnnotation.h;src/ValueTypes.h;src/SimpleTag.h;src/ConfigParams.h;src/ConfigTags.h;src/Encoder.h;src/EncodingContext.h;src/EncodingTypes.h;src/Export.h;src/HttpTransport.h;src/JsonEncoder.h;src/Sampler.h;src/ScribeTransport.h;src/SimpleAnnotation.h;src/span_impl.h;src/StubTransport.h;src/ThriftEncoder.h;src/Transport.h;src/TransportFactory.h;src/TransportManager.h;src/TransportType.h")
+
 	if(WITH_PYTHON)
 		set(binderLib "")
 		if(${PYTHON_BINDING} STREQUAL "sweetPy")
@@ -163,7 +167,8 @@ if(COMPILATION_STEP)
     if(${SPDLOG_FOUND})
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSPDLOG_FOUND")
     endif()
-    target_link_libraries(cppkin ${TO_LINK_LIBS})
+    target_link_libraries(cppkin-shared ${TO_LINK_LIBS})
+    target_link_libraries(cppkin-static ${TO_LINK_LIBS})
 
     if(WITH_EXAMPLES)
         add_subdirectory(${PROJECT_SOURCE_DIR}/examples)
@@ -181,7 +186,7 @@ if(COMPILATION_STEP)
 				FILES_MATCHING PATTERN "*.dll" 
 				)
 	else()
-		install(TARGETS cppkin
+		install(TARGETS cppkin-shared cppkin-static
 				PUBLIC_HEADER DESTINATION ${OUTPUT_DIR}/include
 				LIBRARY DESTINATION ${OUTPUT_DIR}/lib
 				ARCHIVE DESTINATION ${OUTPUT_DIR}/lib
