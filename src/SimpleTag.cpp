@@ -15,6 +15,12 @@ namespace cppkin
     {
     }
 
+    SimpleTag::SimpleTag(const char* key, std::string value) :
+        m_key(key), m_valueType(ValueTypes::String), m_value(std::move(value))
+    {
+    }
+
+
     SimpleTag::SimpleTag(const char* key, int value) :
         m_key(key), m_valueType(ValueTypes::Int), m_value(value)
     {

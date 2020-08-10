@@ -14,6 +14,7 @@ namespace cppkin
     public:
         SimpleTag(const char* key, bool value);
         SimpleTag(const char* key, const char* value);
+        SimpleTag(const char* key, std::string value);
         SimpleTag(const char* key, int value);
         SimpleTag(const char* key, float value);
         SimpleTag(const SimpleTag& object);
