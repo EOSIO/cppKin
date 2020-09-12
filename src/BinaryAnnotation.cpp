@@ -1,5 +1,5 @@
 #include "BinaryAnnotation.h"
-#include "core/Exception.h"
+#include "Exception.h"
 #include "boost/variant/get.hpp"
 
 namespace cppkin

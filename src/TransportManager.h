@@ -6,7 +6,7 @@
 #include <mutex>
 #include "Transport.h"
 #include "boost/lockfree/queue.hpp"
-#include "core/Thread.h"
+#include "Thread.h"
 #include "span_impl.h"
 
 namespace cppkin
