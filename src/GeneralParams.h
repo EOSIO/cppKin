@@ -29,12 +29,14 @@ namespace core
         GeneralParams& operator=(const GeneralParams& rhs)
         {
             Copy(rhs);
+	    return *this;
         }
         GeneralParams(GeneralParams&& obj)
             :m_params(std::move(obj.m_params)){}
         GeneralParams& operator=(GeneralParams&& rhs)
         {
             m_params = std::move(rhs.m_params);
+	    return *this;
         }
         template<typename X>
         void AddParam(const char* key, X&& value)
