@@ -4,8 +4,8 @@
 #include <cinttypes>
 #include <vector>
 #include <memory>
-#include "core/Assert.h"
-#include "core/Environment.h"
+#include "Assert.h"
+#include "Environment.h"
 #include "Annotation.h"
 #include "BinaryAnnotation.h"
 #include "SimpleTag.h"
