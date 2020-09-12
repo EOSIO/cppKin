@@ -131,8 +131,8 @@ if(COMPILATION_STEP)
 		add_dependencies(cppkin-shared ${CPPKIN_DEPEND_LIST})
         add_dependencies(cppkin-static ${CPPKIN_DEPEND_LIST})
 	endif()
-    set_target_properties(cppkin-shared PROPERTIES PUBLIC_HEADER "src/Trace.h;src/Annotation.h;src/cppkin.h;src/Span.h;src/AnnotationType.h;src/BinaryAnnotation.h;src/ValueTypes.h;src/SimpleTag.h;src/ConfigParams.h;src/ConfigTags.h;src/Encoder.h;src/EncodingContext.h;src/EncodingTypes.h;src/Export.h;src/HttpTransport.h;src/JsonEncoder.h;src/Sampler.h;src/ScribeTransport.h;src/SimpleAnnotation.h;src/span_impl.h;src/StubTransport.h;src/ThriftEncoder.h;src/Transport.h;src/TransportFactory.h;src/TransportManager.h;src/TransportType.h")
-    set_target_properties(cppkin-static PROPERTIES PUBLIC_HEADER "src/Trace.h;src/Annotation.h;src/cppkin.h;src/Span.h;src/AnnotationType.h;src/BinaryAnnotation.h;src/ValueTypes.h;src/SimpleTag.h;src/ConfigParams.h;src/ConfigTags.h;src/Encoder.h;src/EncodingContext.h;src/EncodingTypes.h;src/Export.h;src/HttpTransport.h;src/JsonEncoder.h;src/Sampler.h;src/ScribeTransport.h;src/SimpleAnnotation.h;src/span_impl.h;src/StubTransport.h;src/ThriftEncoder.h;src/Transport.h;src/TransportFactory.h;src/TransportManager.h;src/TransportType.h")
+    set_target_properties(cppkin-shared PROPERTIES PUBLIC_HEADER "src/DefaultTraceListeners.h;src/Thread.h;src/GeneralParams.h;src/Param.h;src/DefaultLogger.h;src/TypeTraits.h;src/ChildProcess.h;src/Pipe.h;src/Process.h;src/TraceListener.h;src/Directory.h;src/Export.h;src/Assert.h;src/Environment.h;src/Logger.h;src/LoggerImpl.h;src/NoExcept.h;src/Source.h;src/Enumeration.h;src/Exception.h;src/Trace.h;src/Annotation.h;src/cppkin.h;src/Span.h;src/AnnotationType.h;src/BinaryAnnotation.h;src/ValueTypes.h;src/SimpleTag.h;src/ConfigParams.h;src/ConfigTags.h;src/Encoder.h;src/EncodingContext.h;src/EncodingTypes.h;src/Export.h;src/HttpTransport.h;src/JsonEncoder.h;src/Sampler.h;src/ScribeTransport.h;src/SimpleAnnotation.h;src/span_impl.h;src/StubTransport.h;src/ThriftEncoder.h;src/Transport.h;src/TransportFactory.h;src/TransportManager.h;src/TransportType.h")
+    set_target_properties(cppkin-static PROPERTIES PUBLIC_HEADER "src/DefaultTraceListeners.h;src/Thread.h;src/GeneralParams.h;src/Param.h;src/DefaultLogger.h;src/TypeTraits.h;src/ChildProcess.h;src/Pipe.h;src/Process.h;src/TraceListener.h;src/Directory.h;src/Export.h;src/Assert.h;src/Environment.h;src/Logger.h;src/LoggerImpl.h;src/NoExcept.h;src/Source.h;src/Enumeration.h;src/Exception.h;src/Trace.h;src/Annotation.h;src/cppkin.h;src/Span.h;src/AnnotationType.h;src/BinaryAnnotation.h;src/ValueTypes.h;src/SimpleTag.h;src/ConfigParams.h;src/ConfigTags.h;src/Encoder.h;src/EncodingContext.h;src/EncodingTypes.h;src/Export.h;src/HttpTransport.h;src/JsonEncoder.h;src/Sampler.h;src/ScribeTransport.h;src/SimpleAnnotation.h;src/span_impl.h;src/StubTransport.h;src/ThriftEncoder.h;src/Transport.h;src/TransportFactory.h;src/TransportManager.h;src/TransportType.h")
 
 	if(WITH_PYTHON)
 		set(binderLib "")
@@ -192,10 +192,10 @@ if(COMPILATION_STEP)
 				LIBRARY DESTINATION ${OUTPUT_DIR}/lib
 				ARCHIVE DESTINATION ${OUTPUT_DIR}/lib
 				)
-        install(DIRECTORY ${PROJECT_3RD_LOC}/lib
-                DESTINATION ${OUTPUT_DIR}
-                FILES_MATCHING PATTERN "*.so" PATTERN "*.a"
-                )
+       		install(DIRECTORY ${PROJECT_3RD_LOC}/lib
+                		DESTINATION ${OUTPUT_DIR}
+                		FILES_MATCHING PATTERN "*.so" PATTERN "*.a"
+                		)
 	endif()
 endif()
 
