@@ -19,17 +19,15 @@ cppkin is dependent upon -
 | ----------------------- | -----------| --------- |
 | boost                   | mandatory  | >= 1.65.1 |
 | curl                    | mandatory  | >= 7.54.1 |
-| rapidjson               | mandatory  | >= 1.1.0  |
-| core                    | mandatory  | >= 1.1    |
 | pybind11                | python or tests  | >= 2.2.4 |
 | bottle                  | tests  |    >= 0.12.13 |
 | google benchmark        | tests |     >= 1.3     |
 | thrift                  | only for scribe transport | >= 0.10 |
 
 ### Linux Install:
-All mandatory packages besdies **core** can be fetched directly:
+All mandatory packages can be fetched directly:
 ```
-apt-get install cmake pybind11-dev rapidjson-dev libcurl4-openssl-dev libblkid-dev e2fslibs-dev libboost-all-dev libaudit-dev
+apt-get install cmake pybind11-dev libcurl4-openssl-dev libblkid-dev e2fslibs-dev libboost-all-dev libaudit-dev
 ```
 
 Use the help command to review the different configuration arguments:
