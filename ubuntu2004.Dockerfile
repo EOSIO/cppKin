@@ -34,4 +34,4 @@ COPY setup.py /cppKin
 COPY src/ /cppKin/src
 COPY tests/ /cppKin/tests
 
-RUN cd cppKin && mkdir build && cd build && ../cppkin.sh config --output_dir=/usr/local --3rd_loc_prefix=/usr/local --with_examples && make && make install
+RUN cd cppKin && mkdir build && cd build && ../cppkin.sh config --output_dir=/usr/local --3rd_loc_prefix=/usr/local && make && make install
