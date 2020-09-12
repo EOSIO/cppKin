@@ -11,6 +11,7 @@ COPY LICENSE /cppKin
 COPY MANIFEST.in /cppKin
 COPY README.md /cppKin
 COPY Third_Party/ /cppKin/Third_Party
+COPY external/ /cppKin/external
 COPY appveyor.yml /cppKin
 COPY bench/ /cppKin/bench
 COPY cmake/ /cppKin/cmake
