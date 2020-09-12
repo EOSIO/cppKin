@@ -1,5 +1,7 @@
 steps:
-  - command: "./scripts/build-and-push-container.sh cppkin ubuntu1804 $BUILDKITE_BRANCH"
+  - command: 
+      - "git submodule update --init --recursive"
+      - "./scripts/build-and-push-container.sh cppkin ubuntu1804 $BUILDKITE_BRANCH"
     label: ":ubuntu: 18.04 Docker build cppkin"
     agents:
       queue: "automation-eks-docker-builder-fleet"
@@ -7,7 +9,9 @@ steps:
     retry:
       automatic: true
 
-  - command: "./scripts/build-and-push-container.sh cppkin ubuntu2004 $BUILDKITE_BRANCH"
+  - command: 
+      - "git submodule update --init --recursive"
+      - "./scripts/build-and-push-container.sh cppkin ubuntu2004 $BUILDKITE_BRANCH"
     label: ":ubuntu: 20.04 Docker build cppkin"
     agents:
       queue: "automation-eks-docker-builder-fleet"
