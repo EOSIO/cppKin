@@ -1,6 +1,6 @@
 #include "cppkin.h"
-#include "core/Environment.h"
-#include "core/Logger.h"
+#include "Environment.h"
+#include "Logger.h"
 #include "ConfigParams.h"
 #include "TransportManager.h"
 #include "SpanContainer.h"

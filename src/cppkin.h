@@ -2,7 +2,7 @@
 
 #include <memory>
 #include "Export.h"
-#include "core/GeneralParams.h"
+#include "GeneralParams.h"
 #include "ConfigTags.h"
 #include "Trace.h"
 #include "Span.h"

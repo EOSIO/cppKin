@@ -39,70 +39,70 @@ namespace cppkin
 
     void Span::AddAnnotation(const char* value)
     {
-        if(m_span->GetHeader().Sampled == false)
+        if(!m_span || !m_span->GetHeader().Sampled)
             return;
         m_span->CreateSimpleAnnotation(value);
     }
 
     void Span::AddAnnotation(const char* value, int_fast64_t timeStamp)
     {
-        if(m_span->GetHeader().Sampled == false)
+        if(!m_span || !m_span->GetHeader().Sampled)
             return;
         m_span->CreateSimpleAnnotation(value, timeStamp);
     }
 
     void Span::AddLocalEndpoint()
     {
-        if(m_span->GetHeader().Sampled == false)
+        if(!m_span || !m_span->GetHeader().Sampled)
             return;
         m_span->AddLocalEndpoint();
     }
     
     void Span::AddTag(const char* key, bool value)
     {
-        if(m_span->GetHeader().Sampled == false)
+        if(!m_span || !m_span->GetHeader().Sampled)
             return;
         m_span->CreateBinaryAnnotation(key, value);
     }
     
     void Span::AddTag(const char* key, const char* value)
     {
-        if(m_span->GetHeader().Sampled == false)
+        if(!m_span && !m_span->GetHeader().Sampled)
             return;
         m_span->CreateBinaryAnnotation(key, value);
     }
 
     void Span::AddSimpleTag(const char* key, bool value)
     {
-        if(m_span->GetHeader().Sampled == false)
+        if(!m_span || !m_span->GetHeader().Sampled)
             return;
         m_span->CreateSimpleTag(key, value);
     }
 
     void Span::AddSimpleTag(const char* key, const char* value)
     {
-        if(m_span->GetHeader().Sampled == false)
+        if(!m_span || !m_span->GetHeader().Sampled)
             return;
         m_span->CreateSimpleTag(key, value);
     }
 
     void Span::AddSimpleTag(const char* key, int value)
     {
-        if(m_span->GetHeader().Sampled == false)
+       if(!m_span || !m_span->GetHeader().Sampled)
             return;
         m_span->CreateSimpleTag(key, value);
     }
 
     void Span::AddSimpleTag(const char* key, float value)
     {
-        if(m_span->GetHeader().Sampled == false)
+       if(!m_span || !m_span->GetHeader().Sampled)
             return;
         m_span->CreateSimpleTag(key, value);
     }
 
     void Span::Submit(const char* value)
     {
-        if(m_span->GetHeader().Sampled == false)
+       if(!m_span || !m_span->GetHeader().Sampled)
             return;
         m_span->SetEndTime();
         if(strcmp(value, Annotation::Value::NOP) != 0)
@@ -112,11 +112,12 @@ namespace cppkin
 
     bool Span::IsSampled() const
     {
-        return m_span->GetHeader().Sampled;
+        return m_span && m_span->GetHeader().Sampled;
     }
     
     void Span::GetHeaderB3Format(const char*& b3header) const
     {
+        if(!m_span) throw core::Exception(__CORE_SOURCE, "Header not available");
         typedef std::unique_ptr<char, std::function<void(char*)>> char_ptr;
         std::string b3header_str = m_span->GetHeaderB3Format();
         char_ptr temp_header((char*)malloc(sizeof(char)*(b3header_str.size() + 1)), [](char* ptr){free(ptr);});
@@ -127,6 +128,7 @@ namespace cppkin
 
     const span_impl::SpanHeader& Span::GetHeader() const
     {
+        if(!m_span) throw core::Exception(__CORE_SOURCE, "SpanHeader not available");
         return m_span->GetHeader();
     }
 }

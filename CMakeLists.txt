@@ -1,7 +1,7 @@
 project(cppKin CXX)
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.8)
 
-set (CMAKE_CXX_STANDARD 11)
+set (CMAKE_CXX_STANDARD 14)
 set (CMAKE_CXX_STANDARD_REQUIRED ON)
 set (CMAKE_COLOR_MAKEFILE ON)
 set (CMAKE_CXX_EXTENSIONS OFF)
@@ -70,8 +70,6 @@ if(3RD_PARTY_INSTALL_STEP)
     find_package(SpdLog)
     find_package(Boost_Pack)
     find_package(CURL)
-    find_package(Core)
-    find_package(RapidJson)
     if(WITH_PYTHON)
         find_package(Python)
         if(${PYTHON_BINDING} STREQUAL "sweetPy")
@@ -117,17 +115,25 @@ if(COMPILATION_STEP)
 
     if(WIN32)
         add_definitions(-DCURL_STATICLIB)
-        set(TO_LINK_LIBS libcurl Core${CMAKE_DEBUG_POSTFIX}.dll Ws2_32)
+        set(TO_LINK_LIBS libcurl Ws2_32)
     else()
-        set(TO_LINK_LIBS pthread curl libCore${CMAKE_DEBUG_POSTFIX}.so)
+        set(TO_LINK_LIBS pthread curl)
     endif()
 
-    add_library(cppkin SHARED src/Trace.h src/SpanContainer.h src/SpanContainer.cpp src/span_impl.cpp src/span_impl.h src/AnnotationType.cpp src/AnnotationType.h src/Annotation.h src/SimpleAnnotation.cpp src/SimpleAnnotation.h src/cppkin.h src/Trace.cpp src/Encoder.cpp src/Encoder.h src/EncodingTypes.cpp src/EncodingTypes.h src/EncodingContext.cpp src/EncodingContext.h src/TransportManager.cpp src/TransportManager.h src/Transport.cpp src/Transport.h src/HttpTransport.cpp src/HttpTransport.h src/ConfigTags.h src/TransportType.cpp src/TransportType.h src/TransportFactory.h src/TransportFactory.cpp src/ConfigParams.cpp src/ConfigTags.cpp src/Annotation.cpp src/Sampler.cpp src/JsonEncoder.h src/cppkin.cpp src/Export.h src/Span.cpp src/Span.h src/BinaryAnnotation.cpp src/SimpleTag.cpp)
+    set(CPPKIN_SOURCES src/DefaultTraceListeners.h src/DefaultTraceListeners.cpp src/Thread.h src/GeneralParams.h src/Param.h src/DefaultLogger.h src/DefaultLogger.cpp src/TypeTraits.h src/ChildProcess.h src/ChildProcess.cpp src/Pipe.h src/Pipe.cpp src/Process.h src/Process.cpp src/TraceListener.h src/Directory.h src/Directory.cpp src/Export.h src/Assert.h src/Environment.h src/Environment.cpp src/Logger.h src/Logger.cpp src/LoggerImpl.h src/NoExcept.h src/Source.h src/Enumeration.h src/Exception.h src/Trace.h src/SpanContainer.h src/SpanContainer.cpp src/span_impl.cpp src/span_impl.h src/AnnotationType.cpp src/AnnotationType.h src/Annotation.h src/SimpleAnnotation.cpp src/SimpleAnnotation.h src/cppkin.h src/Trace.cpp src/Encoder.cpp src/Encoder.h src/EncodingTypes.cpp src/EncodingTypes.h src/EncodingContext.cpp src/EncodingContext.h src/TransportManager.cpp src/TransportManager.h src/Transport.cpp src/Transport.h src/HttpTransport.cpp src/HttpTransport.h src/ConfigTags.h src/TransportType.cpp src/TransportType.h src/TransportFactory.h src/TransportFactory.cpp src/ConfigParams.cpp src/ConfigTags.cpp src/Annotation.cpp src/Sampler.cpp src/JsonEncoder.h src/cppkin.cpp src/Export.h src/Span.cpp src/Span.h src/BinaryAnnotation.cpp src/SimpleTag.cpp)
+
+    add_library(cppkin-shared SHARED ${CPPKIN_SOURCES})
+    set_target_properties(cppkin-shared PROPERTIES OUTPUT_NAME cppkin)
+    add_library(cppkin-static STATIC ${CPPKIN_SOURCES})
+    set_target_properties(cppkin-static PROPERTIES OUTPUT_NAME cppkin)
+
 	if(CPPKIN_DEPEND_LIST)
-		add_dependencies(cppkin ${CPPKIN_DEPEND_LIST})
+		add_dependencies(cppkin-shared ${CPPKIN_DEPEND_LIST})
+        add_dependencies(cppkin-static ${CPPKIN_DEPEND_LIST})
 	endif()
-        set_target_properties(cppkin PROPERTIES PUBLIC_HEADER "src/Trace.h;src/Annotation.h;src/cppkin.h;src/Span.h;src/AnnotationType.h;src/BinaryAnnotation.h;src/ValueTypes.h;src/SimpleTag.h;src/ConfigParams.h;src/ConfigTags.h;src/Encoder.h;src/EncodingContext.h;src/EncodingTypes.h;src/Export.h;src/HttpTransport.h;src/JsonEncoder.h;src/Sampler.h;src/ScribeTransport.h;src/SimpleAnnotation.h;src/span_impl.h;src/StubTransport.h;src/ThriftEncoder.h;src/Transport.h;src/TransportFactory.h;src/TransportManager.h;src/TransportType.h")
-	
+    set_target_properties(cppkin-shared PROPERTIES PUBLIC_HEADER "src/DefaultTraceListeners.h;src/Thread.h;src/GeneralParams.h;src/Param.h;src/DefaultLogger.h;src/TypeTraits.h;src/ChildProcess.h;src/Pipe.h;src/Process.h;src/TraceListener.h;src/Directory.h;src/Export.h;src/Assert.h;src/Environment.h;src/Logger.h;src/LoggerImpl.h;src/NoExcept.h;src/Source.h;src/Enumeration.h;src/Exception.h;src/Trace.h;src/Annotation.h;src/cppkin.h;src/Span.h;src/AnnotationType.h;src/BinaryAnnotation.h;src/ValueTypes.h;src/SimpleTag.h;src/ConfigParams.h;src/ConfigTags.h;src/Encoder.h;src/EncodingContext.h;src/EncodingTypes.h;src/Export.h;src/HttpTransport.h;src/JsonEncoder.h;src/Sampler.h;src/ScribeTransport.h;src/SimpleAnnotation.h;src/span_impl.h;src/StubTransport.h;src/ThriftEncoder.h;src/Transport.h;src/TransportFactory.h;src/TransportManager.h;src/TransportType.h")
+    set_target_properties(cppkin-static PROPERTIES PUBLIC_HEADER "src/DefaultTraceListeners.h;src/Thread.h;src/GeneralParams.h;src/Param.h;src/DefaultLogger.h;src/TypeTraits.h;src/ChildProcess.h;src/Pipe.h;src/Process.h;src/TraceListener.h;src/Directory.h;src/Export.h;src/Assert.h;src/Environment.h;src/Logger.h;src/LoggerImpl.h;src/NoExcept.h;src/Source.h;src/Enumeration.h;src/Exception.h;src/Trace.h;src/Annotation.h;src/cppkin.h;src/Span.h;src/AnnotationType.h;src/BinaryAnnotation.h;src/ValueTypes.h;src/SimpleTag.h;src/ConfigParams.h;src/ConfigTags.h;src/Encoder.h;src/EncodingContext.h;src/EncodingTypes.h;src/Export.h;src/HttpTransport.h;src/JsonEncoder.h;src/Sampler.h;src/ScribeTransport.h;src/SimpleAnnotation.h;src/span_impl.h;src/StubTransport.h;src/ThriftEncoder.h;src/Transport.h;src/TransportFactory.h;src/TransportManager.h;src/TransportType.h")
+
 	if(WITH_PYTHON)
 		set(binderLib "")
 		if(${PYTHON_BINDING} STREQUAL "sweetPy")
@@ -141,7 +147,7 @@ if(COMPILATION_STEP)
 		if(CPPKIN_WRAPPER_DEPEND_LIST)
 			add_dependencies(_cppkin ${CPPKIN_WRAPPER_DEPEND_LIST})
 		endif()
-		target_link_libraries(_cppkin libCore${CMAKE_DEBUG_POSTFIX}.so ${binderLib} cppkin)
+		target_link_libraries(_cppkin ${binderLib} cppkin)
 		set_target_properties(_cppkin PROPERTIES PREFIX "")
 		set_target_properties(_cppkin PROPERTIES DEBUG_POSTFIX "")
 	endif()
@@ -159,7 +165,11 @@ if(COMPILATION_STEP)
     if(${SPDLOG_FOUND})
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DSPDLOG_FOUND")
     endif()
-    target_link_libraries(cppkin ${TO_LINK_LIBS})
+    target_link_libraries(cppkin-shared ${TO_LINK_LIBS})
+    target_link_libraries(cppkin-static ${TO_LINK_LIBS})
+
+    target_include_directories(cppkin-shared PUBLIC include external/rapidjson/include)
+    target_include_directories(cppkin-static PUBLIC include external/rapidjson/include)
 
     if(WITH_EXAMPLES)
         add_subdirectory(${PROJECT_SOURCE_DIR}/examples)
@@ -177,14 +187,15 @@ if(COMPILATION_STEP)
 				FILES_MATCHING PATTERN "*.dll" 
 				)
 	else()
-		install(TARGETS cppkin
+		install(TARGETS cppkin-shared cppkin-static
 				PUBLIC_HEADER DESTINATION ${OUTPUT_DIR}/include
 				LIBRARY DESTINATION ${OUTPUT_DIR}/lib
+				ARCHIVE DESTINATION ${OUTPUT_DIR}/lib
 				)
-        install(DIRECTORY ${PROJECT_3RD_LOC}/lib
-                DESTINATION ${OUTPUT_DIR}
-                FILES_MATCHING PATTERN "*.so"
-                )
+       		install(DIRECTORY ${PROJECT_3RD_LOC}/lib
+                		DESTINATION ${OUTPUT_DIR}
+                		FILES_MATCHING PATTERN "*.so" PATTERN "*.a"
+                		)
 	endif()
 endif()
 

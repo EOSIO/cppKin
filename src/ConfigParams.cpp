@@ -1,5 +1,5 @@
 #include "ConfigParams.h"
-#include "core/GeneralParams.h"
+#include "GeneralParams.h"
 #include "ConfigTags.h"
 
 using namespace std;
